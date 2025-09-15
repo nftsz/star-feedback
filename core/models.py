@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 class ROM(models.Model):
     EMULADOR_CHOICES =   [
-        ('nswitch', 'Nintendo Switch'),
-        ('gba', 'Game Boy Advance'),
+        ('ns', 'Nintendo Switch'),
+        ('gba', 'GBA'),
         ('nes', 'NES'),
         ('ps1', 'PS1'),
         ('ps2', 'PS2'),
@@ -14,6 +14,7 @@ class ROM(models.Model):
     nome = models.CharField(max_length=100)
     emulador = models.CharField(max_length=10, choices=EMULADOR_CHOICES)
     imagem = models.ImageField(upload_to='roms/')
+    # data de entrada da ROM, para listagem no "recentes adicionados"
 
     def __str__(self):
         return f"{self.nome} ({self.get_emulador_display()})"
