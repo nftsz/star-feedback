@@ -22,4 +22,8 @@ class ROM(models.Model):
 class Avaliacao(models.Model):
     rom = models.ForeignKey(ROM, on_delete=models.CASCADE, related_name='avaliacoes')
     estrelas = models.PositiveBigIntegerField()
+    session_id = models.CharField(max_length=40, default="anon")
     criado_em = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('rom', 'session_id')  
