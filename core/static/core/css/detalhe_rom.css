@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f0f0f;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+}
+
+.rom-detalhe {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.rom-imagem img {
+    width: 250px;
+    border-radius: 10px;
+}
+
+.rom-info h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.rom-info p {
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.estrelas {
+    margin-top: 10px;
+}
+
+.estrelas span {
+    font-size: 2em;
+    color: #ffd700;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.btn-azul {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+.btn-vermelho {
+    background-color: #e74c3c;
+    color: #fff;
+}
