@@ -23,7 +23,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', views.lista_roms)
+    path('home/', views.lista_roms),
+    path('avaliar/<int:rom_id>/', views.avaliar_rom, name='avaliar_rom'),
+    path('rom/<int:rom_id>/', views.detalhe_rom, name='detalhe_rom'),
 ]
 
 if settings.DEBUG:

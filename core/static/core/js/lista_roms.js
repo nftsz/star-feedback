@@ -56,5 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(err => console.error('Erro ao avaliar ROM:', err));
             });
         });
+
+        //Clique no card inteiro para abrir detalhe
+        romDiv.addEventListener('click', () => {
+            const romId = romDiv.dataset.romId;
+            window.location.href = `/rom/${romId}/`;
+        });
     });
 });

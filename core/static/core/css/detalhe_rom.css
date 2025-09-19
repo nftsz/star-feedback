@@ -1,0 +1,91 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f0f0f;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    padding: 60px 30px;
+    margin: 0;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    background-color: #1a1a1a;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.rom-detalhe {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.rom-imagem img {
+    width: 320px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.rom-info h1 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.rom-info p {
+    margin-bottom: 25px;
+    color: #d0d0d0;
+    font-size: 1.3em;
+}
+
+.estrelas {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.estrelas span {
+    font-size: 2.8em;
+    color: #ffd700;
+    cursor: pointer;
+    margin-right: 8px;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.estrelas span:hover {
+    transform: scale(1.2);
+    color: #ffed4e;
+}
+
+.btn {
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-right: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-azul {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+.btn-azul:hover {
+    background-color: #4c70ba;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(59, 89, 152, 0.4);
+}
+
+.media {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #ffd700;
+}

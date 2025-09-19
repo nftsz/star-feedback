@@ -48,3 +48,23 @@ def avaliar_rom(request, rom_id):
             return JsonResponse({'media': round(media, 2), 'nova': created})
         
     return JsonResponse({'erro': 'Dados inválidos'}, status=400)
+
+def detalhe_rom(request, rom_id):
+    rom = get_object_or_404(ROM, id=rom_id)
+    return render(request, "core/detalhe_rom.html", {"rom": rom})
+
+def excluir_avaliacao(request, rom_id):
+    if request.method == 'POST':
+        rom = get_object_or_404(ROM, id=rom_id)
+        session_id = request.session.session_key
+        if session_id:
+            try:
+                avaliacao = Avaliacao.objects.get(rom=rom, session_id=session_id)
+                avaliacao.delete()
+                # Atualiza a média
+                media = rom.avaliacoes.aggregate(media=Avg('estrelas'))['media'] or 0
+                return JsonResponse({'media': round(media, 2), 'excluida': True})
+            except Avaliacao.DoesNotExist:
+                return JsonResponse({'erro': 'Avaliação não encontrada'}, status=404)
+        return JsonResponse({'erro': 'Sessão não encontrada'}, status=400)
+    return JsonResponse({'erro': 'Método inválido'}, status=405)
