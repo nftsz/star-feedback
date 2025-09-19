@@ -29,3 +29,7 @@ def avaliar_rom(request, rom_id):
             # retorna a média e se foi criação ou atualização
             return JsonResponse({'media': round(media, 2), 'nova': created})
     return JsonResponse({'erro': 'Dados inválidos'}, status=400)
+
+def detalhe_rom(request, rom_id):
+    rom = get_object_or_404(ROM, id=rom_id)
+    return render(request, "core/detalhe_rom.html", {"rom": rom})

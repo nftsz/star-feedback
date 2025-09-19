@@ -1,0 +1,15 @@
+
+{% block content %}
+<div style="text-align:center;">
+    <h1>{{ rom.nome }}</h1>
+    <img src="{{ rom.imagem.url }}" alt="{{ rom.nome }}" width="300">
+    <p>Console: {{ rom.console }}</p>
+
+    <h3>Avalie com estrelas</h3>
+    <div class="estrelas" data-media="{{ rom.media }}">
+        {% for i in "12345" %}
+            <span data-valor="{{ forloop.counter }}">★</span>
+        {% endfor %}
+    </div>
+    <p>Média: <span class="media">{{ rom.media|default:"0" }}</span></p>
+{% endblock %}
