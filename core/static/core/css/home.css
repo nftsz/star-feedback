@@ -188,12 +188,15 @@ section {
 }
 
 /* Top Rated Section */
+.top-rated-section {
+    padding: 60px 0;
+    background: linear-gradient(180deg, #151C2D, #101421);
+}
+
 .top-rated {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 25px;
-    padding: 50px 0;
-    margin: 0 50px;
 }
 
 /* Card da ROM */
@@ -243,12 +246,11 @@ section {
 
 .estrelas span {
     font-size: 20px;
-    cursor: pointer;
+    cursor: default; 
     color: #444;
-    transition: color 0.2s;
 }
 
-.estrelas span.active {
+.estrelas span.filled {
     color: gold;
 }
 
