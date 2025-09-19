@@ -35,18 +35,23 @@ header {
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: white;
 }
 
-.logo i {
-    margin-right: 10px;
-    color: #33519C;
+.logo img {
+    height: 50px;
+    width: auto;
+    margin-right: 10px; /* espaço entre a imagem e o texto */
 }
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
 
 nav ul {
     display: flex;
@@ -62,16 +67,33 @@ nav ul li a {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
+    position: relative;
+    padding: 5px 0;
 }
 
 nav ul li a:hover {
     color: #33519C;
 }
 
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #33519C;
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-               url("{% static 'core/hero.jpg' %}") no-repeat center center/cover;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
     height: 500px;
     display: flex;
     align-items: center;
@@ -87,6 +109,7 @@ nav ul li a:hover {
 .hero h1 {
     font-size: 48px;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .hero p {
@@ -107,6 +130,7 @@ nav ul li a:hover {
     border: none;
     border-radius: 4px 0 0 4px;
     font-size: 16px;
+    background: rgba(255,255,255,0.9);
 }
 
 .search-bar button {
@@ -117,6 +141,11 @@ nav ul li a:hover {
     border-radius: 0 4px 4px 0;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #2a4485;
 }
 
 /* Sections */
@@ -132,14 +161,39 @@ section {
     display: inline-block;
 }
 
-/* Game Cards */
-/* Container geral da seção Top Rated */
+/* Seções com títulos */
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: white;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #33519C;
+}
+
+/* Top Rated Section */
 .top-rated {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 25px;
     padding: 50px 0;
-    margin-left: 50px;
+    margin: 0 50px;
 }
 
 /* Card da ROM */
@@ -148,34 +202,39 @@ section {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
     text-align: center;
     padding-bottom: 15px;
 }
 
 .rom:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
-/* Imagem da ROM */
 .rom img {
     width: 100%;
     height: 180px;
     object-fit: cover;
+    transition: transform 0.3s;
 }
 
-/* Nome e emulador */
+.rom:hover img {
+    transform: scale(1.05);
+}
+
 .rom h3 {
     font-size: 18px;
     color: white;
     margin: 10px 0 5px 0;
+    padding: 0 10px;
 }
 
 .rom h5 {
-    color: #4A64A2; /* se quiser destacar o emulador */
+    color: #4A64A2;
+    margin-bottom: 10px;
 }
 
-/* Estrelas de avaliação */
 .estrelas {
     display: flex;
     justify-content: center;
@@ -185,21 +244,30 @@ section {
 .estrelas span {
     font-size: 20px;
     cursor: pointer;
-    color: gray;
+    color: #444;
     transition: color 0.2s;
 }
 
-/* Cor dourada para estrelas ativas */
 .estrelas span.active {
     color: gold;
 }
 
-/* Média da avaliação */
 .media {
     font-size: 14px;
     color: #ddd;
 }
 
+/* Most Recent Added Section */
+.recent-added {
+    background-color: #1a243f;
+    padding: 50px 0;
+}
+
+.games-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
 
 /* Footer */
 footer {
@@ -208,63 +276,8 @@ footer {
     color: #ddd;
 }
 
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.footer-section h3 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: white;
-}
-
-.footer-section p, .footer-section a {
-    margin-bottom: 10px;
-    display: block;
-    color: #ddd;
-    text-decoration: none;
-}
-
-.footer-section a:hover {
-    color: #33519C;
-}
-
-.social-icons a {
-    display: inline-block;
-    margin-right: 15px;
-    font-size: 20px;
-}
-
 .footer-bottom {
     text-align: center;
     padding-top: 20px;
     border-top: 1px solid #33519C;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    nav ul {
-        margin-top: 15px;
-        justify-content: center;
-    }
-    
-    nav ul li {
-        margin: 0 10px;
-    }
-    
-    .hero h1 {
-        font-size: 36px;
-    }
-    
-    .games-container {
-        grid-template-columns: 1fr;
-    }
 }

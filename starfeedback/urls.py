@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.lista_roms)
+    path('home/', views.lista_roms)
 ]
 
 if settings.DEBUG:

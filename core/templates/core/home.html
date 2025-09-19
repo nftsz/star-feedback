@@ -5,8 +5,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ROMs</title>
-    <link rel="stylesheet" href="{% static 'core/home.css' %}">
+    <title>Ride Analytics - Home</title>
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
+
 </head>
 
 <body>
@@ -15,8 +16,8 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">
-                    <i class="fas fa-gamepad"></i>
-                    GameROM Reviews
+                    <img src="{% static 'core/logo.png' %}" alt="logo">
+                    <span class="logo-text">Ride Analytics</span>
                 </a>
                 <nav>
                     <ul>
@@ -24,7 +25,8 @@
                         <li><a href="#">ROMs</a></li>
                         <li><a href="#">Emuladores</a></li>
                         <li><a href="#">Avaliações</a></li>
-                        <li><a href="#">Contato</a></li>
+                        <!-- <li><button type="button"></button></li>  Login 
+                        <li><button type="button"></button></li> Registro -->
                     </ul>
                 </nav>
             </div>
@@ -44,28 +46,40 @@
     </section>
 
     <!-- Top Rated Section -->
-    <section class="top-rated">
-        {% for rom in roms %}
-        <div class="rom" data-rom-id="{{ rom.id }}">
-            <img src="{{ rom.imagem.url }}" alt="{{ rom.nome }}">
-            <h3>{{ rom.nome }}</h3>
-            <h5><span>({{ rom.get_emulador_display }})</span></h5>
-            <div class="estrelas" data-media="{{ rom.media|default:0 }}">
-                {% for i in "12345" %}
-                <span data-valor="{{ i }}">★</span>
+    <section class="top-rated-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Top Rated ROMs</h2>
+            </div>
+            <div class="top-rated">
+                <!-- Seu loop Django aqui -->
+                {% for rom in roms %}
+                <div class="rom" data-rom-id="{{ rom.id }}">
+                    <img src="{{ rom.imagem.url }}" alt="{{ rom.nome }}">
+                    <h3>{{ rom.nome }}</h3>
+                    <h5><span>({{ rom.get_emulador_display }})</span></h5>
+                    <div class="estrelas" data-media="{{ rom.media|default:0 }}">
+                        {% for i in "12345" %}
+                        <span data-valor="{{ i }}">★</span>
+                        {% endfor %}
+                    </div>
+                    <p>Média: <span class="media">{{ rom.media|default:"0" }}</span></p>
+                </div>
                 {% endfor %}
             </div>
-            <p>Média: <span class="media">{{ rom.media|default:"0" }}</span></p>
         </div>
-        {% endfor %}
     </section>
 
     <!-- Most Recent Added Section -->
-    <section class="recent-added">
+    <section class="recent-added-section">
         <div class="container">
-            <h2 class="section-title">Most Recent Added</h2>
-            <div class="games-container">
-                <!-- Game Cards aqui -->
+            <div class="section-header">
+                <h2>Most Recent Added</h2>
+            </div>
+            <div class="recent-added">
+                <div class="games-container">
+                    <!-- Game Cards aqui -->
+                </div>
             </div>
         </div>
     </section>
@@ -77,41 +91,8 @@
         </div>
     </footer>
 
-    <script>
-        document.querySelectorAll('.rom').forEach(romDiv => {
-            const estrelas = romDiv.querySelectorAll('.estrelas span');
-            const mediaSpan = romDiv.querySelector('.media');
+ <script src="{% static 'core/js/lista_roms.js' %}"></script>
 
-            estrelas.forEach(e => {
-                e.addEventListener('mouseover', () => {
-                    let valor = e.dataset.valor;
-                    estrelas.forEach(s => s.style.color = s.dataset.valor <= valor ? 'gold' : 'gray');
-                });
-
-                e.addEventListener('mouseout', () => {
-                    let media = parseFloat(romDiv.querySelector('.estrelas').dataset.media);
-                    estrelas.forEach(s => s.style.color = s.dataset.valor <= media ? 'gold' : 'gray');
-                });
-
-                e.addEventListener('click', () => {
-                    let valor = e.dataset.valor;
-                    const romId = romDiv.dataset.romId;
-
-                    fetch(`/avaliar/${romId}/`, {
-                        method: 'POST',
-                        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
-                        body: new URLSearchParams({ estrelas: valor })
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            romDiv.querySelector('.estrelas').dataset.media = data.media;
-                            mediaSpan.textContent = parseFloat(data.media).toFixed(2);
-                            estrelas.forEach(s => s.style.color = s.dataset.valor <= data.media ? 'gold' : 'gray');
-                        });
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>
