@@ -62,6 +62,7 @@
                     <!-- Nome e emulador -->
                     <h3>{{ rom.nome }}</h3>
                     <h5><span>({{ rom.get_emulador_display }})</span></h5>
+
                     <!-- Estrelas -->
                     <div class="estrelas">
                         {% for i in "12345" %}
@@ -73,17 +74,10 @@
                         {% endfor %}
                     </div>
                     <p>Média: {{ rom.media|default:"0"|floatformat:2 }}</p>
-                    <!-- Galeria de imagens -->
-                    {% if rom.imagens.all %}
-                    <div class="galeria">
-                        {% for img in rom.imagens.all %}
-                        <img src="{{ img.imagem.url }}" alt="{{ img.descricao|default:rom.nome }}">
-                        {% endfor %}
-                    </div>
-                    {% endif %}
                 </div>
+
                 {% empty %}
-                <p>Nenhuma ROM encontrada.</p>
+                    <p>Nenhuma ROM encontrada.</p>
                 {% endfor %}
             </div>
         </div>
@@ -99,15 +93,19 @@
                 <div class="games-container">
                     {% for rom in roms_recent %}
                     <div class="rom" data-rom-id="{{ rom.id }}">
-                        <img src="{{ rom.imagem_capa.url|default:'/static/img/placeholder.png' }}" alt="{{ rom.nome }}">
+
+                        <!-- Capa -->
+                        {% if rom.imagem_capa %}
+                            <img src="{{ rom.imagem_capa.url }}" alt="{{ rom.nome }}">
+                        {% else %}
+                            <img src="{% static 'default.jpg' %}" alt="{{ rom.nome }}">
+                        {% endif %}
+
+                        <!-- Nome e emulador -->
                         <h3>{{ rom.nome }}</h3>
                         <h5><span>({{ rom.get_emulador_display }})</span></h5>
-                        {% if rom.estudio %}
-                        <p><strong>Estúdio:</strong> {{ rom.estudio }}</p>
-                        {% endif %}
-                        {% if rom.sinopse %}
-                        <p class="sinopse">{{ rom.sinopse }}</p>
-                        {% endif %}
+
+                        <!-- Estrelas -->
                         <div class="estrelas">
                             {% for i in "12345" %}
                                 {% if i|add:0 <= rom.media_int %}
@@ -118,13 +116,6 @@
                             {% endfor %}
                         </div>
                         <p>Média: {{ rom.media|default:"0"|floatformat:2 }}</p>
-                        {% if rom.imagens.all %}
-                        <div class="galeria">
-                            {% for img in rom.imagens.all %}
-                            <img src="{{ img.imagem.url }}" alt="{{ img.descricao|default:rom.nome }}">
-                            {% endfor %}
-                        </div>
-                        {% endif %}
                     </div>
                     {% empty %}
                     <p>Nenhuma ROM encontrada.</p>

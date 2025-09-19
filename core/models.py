@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+import uuid
 
 # função para criar pastas por ROM
 def rom_jogo_path(instance, filename):
@@ -36,6 +37,9 @@ class ImagemJogo(models.Model):
     def __str__(self):
         return f"Imagem de {self.rom.nome} - {self.descricao or 'sem descrição'}"
 
+# função pra gerar session_id único
+def gerar_session_id():
+    return str(uuid.uuid4())
     
 class Avaliacao(models.Model):
     rom = models.ForeignKey(ROM, on_delete=models.CASCADE, related_name='avaliacoes')

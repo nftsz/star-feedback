@@ -187,19 +187,22 @@ section {
     background-color: #33519C;
 }
 
-/* Top Rated Section */
-.top-rated-section {
+/* Seções iguais */
+.top-rated-section,
+.recent-added-section {
     padding: 60px 0;
     background: linear-gradient(180deg, #151C2D, #101421);
 }
 
-.top-rated {
+/* Grid de cards */
+.top-rated,
+.games-container {   /* games-container = recent-added */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 25px;
 }
 
-/* Card da ROM */
+/* Card da ROM (igual pros dois) */
 .rom {
     background-color: #1a243f;
     border-radius: 8px;
@@ -238,6 +241,7 @@ section {
     margin-bottom: 10px;
 }
 
+/* Estrelas */
 .estrelas {
     display: flex;
     justify-content: center;
@@ -250,8 +254,14 @@ section {
     color: #444;
 }
 
-.estrelas span.filled {
+.estrelas span.full {
     color: gold;
+}
+
+.estrelas span.half {
+    background: linear-gradient(90deg, gold 50%, #444 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .media {
@@ -259,17 +269,6 @@ section {
     color: #ddd;
 }
 
-/* Most Recent Added Section */
-.recent-added {
-    background-color: #1a243f;
-    padding: 50px 0;
-}
-
-.games-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
 
 /* Footer */
 footer {
