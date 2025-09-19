@@ -70,20 +70,4 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => console.error('Erro ao avaliar ROM:', err));
     });
 
-    // Botão excluir avaliação
-    const excluirBtn = document.getElementById('excluir-btn');
-    excluirBtn?.addEventListener('click', () => {
-        fetch(`/excluir_avaliacao/${romId}/`, {
-            method: 'DELETE',
-            headers: { 'X-CSRFToken': csrftoken }
-        })
-            .then(res => res.json())
-            .then(data => {
-                estrelasContainer.dataset.media = data.media;
-                mediaSpan.textContent = parseFloat(data.media).toFixed(2);
-                atualizarEstrelas(parseFloat(data.media));
-                alert('Avaliação excluída!');
-            })
-            .catch(err => console.error('Erro ao excluir avaliação:', err));
-    });
 });
