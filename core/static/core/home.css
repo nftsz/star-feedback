@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #151C2D;
+    color: white;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header */
+header {
+    background-color: #141826;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    margin-right: 10px;
+    color: #33519C;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #33519C;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+               url("{% static 'core/hero.jpg' %}") no-repeat center center/cover;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #ddd;
+}
+
+.search-bar {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+}
+
+.search-bar button {
+    background-color: #33519C;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Sections */
+section {
+    padding: 50px 0;
+}
+
+.section-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #33519C;
+    display: inline-block;
+}
+
+/* Game Cards */
+/* Container geral da seção Top Rated */
+.top-rated {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 50px 0;
+    margin-left: 50px;
+}
+
+/* Card da ROM */
+.rom {
+    background-color: #1a243f;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.rom:hover {
+    transform: translateY(-5px);
+}
+
+/* Imagem da ROM */
+.rom img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Nome e emulador */
+.rom h3 {
+    font-size: 18px;
+    color: white;
+    margin: 10px 0 5px 0;
+}
+
+.rom h5 {
+    color: #4A64A2; /* se quiser destacar o emulador */
+}
+
+/* Estrelas de avaliação */
+.estrelas {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.estrelas span {
+    font-size: 20px;
+    cursor: pointer;
+    color: gray;
+    transition: color 0.2s;
+}
+
+/* Cor dourada para estrelas ativas */
+.estrelas span.active {
+    color: gold;
+}
+
+/* Média da avaliação */
+.media {
+    font-size: 14px;
+    color: #ddd;
+}
+
+
+/* Footer */
+footer {
+    background-color: #141826;
+    padding: 40px 0 20px;
+    color: #ddd;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-section h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-section p, .footer-section a {
+    margin-bottom: 10px;
+    display: block;
+    color: #ddd;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: #33519C;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #33519C;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav ul {
+        margin-top: 15px;
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 0 10px;
+    }
+    
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    .games-container {
+        grid-template-columns: 1fr;
+    }
+}

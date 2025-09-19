@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ROMs</title>
+    <link rel="stylesheet" href="{% static 'core/home.css' %}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-gamepad"></i>
+                    GameROM Reviews
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#">Início</a></li>
+                        <li><a href="#">ROMs</a></li>
+                        <li><a href="#">Emuladores</a></li>
+                        <li><a href="#">Avaliações</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Encontre as Melhores ROMs para Emuladores</h1>
+            <p>Descubra, avalie e compartilhe suas experiências com jogos clássicos</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar ROMs por nome, console ou gênero...">
+                <button><i class="fas fa-search"></i> Buscar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Rated Section -->
+    <section class="top-rated">
+        {% for rom in roms %}
+        <div class="rom" data-rom-id="{{ rom.id }}">
+            <img src="{{ rom.imagem.url }}" alt="{{ rom.nome }}">
+            <h3>{{ rom.nome }}</h3>
+            <h5><span>({{ rom.get_emulador_display }})</span></h5>
+            <div class="estrelas" data-media="{{ rom.media|default:0 }}">
+                {% for i in "12345" %}
+                <span data-valor="{{ i }}">★</span>
+                {% endfor %}
+            </div>
+            <p>Média: <span class="media">{{ rom.media|default:"0" }}</span></p>
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- Most Recent Added Section -->
+    <section class="recent-added">
+        <div class="container">
+            <h2 class="section-title">Most Recent Added</h2>
+            <div class="games-container">
+                <!-- Game Cards aqui -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-bottom">
+            &copy; 2025 Naftaly e Daniel. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.rom').forEach(romDiv => {
+            const estrelas = romDiv.querySelectorAll('.estrelas span');
+            const mediaSpan = romDiv.querySelector('.media');
+
+            estrelas.forEach(e => {
+                e.addEventListener('mouseover', () => {
+                    let valor = e.dataset.valor;
+                    estrelas.forEach(s => s.style.color = s.dataset.valor <= valor ? 'gold' : 'gray');
+                });
+
+                e.addEventListener('mouseout', () => {
+                    let media = parseFloat(romDiv.querySelector('.estrelas').dataset.media);
+                    estrelas.forEach(s => s.style.color = s.dataset.valor <= media ? 'gold' : 'gray');
+                });
+
+                e.addEventListener('click', () => {
+                    let valor = e.dataset.valor;
+                    const romId = romDiv.dataset.romId;
+
+                    fetch(`/avaliar/${romId}/`, {
+                        method: 'POST',
+                        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+                        body: new URLSearchParams({ estrelas: valor })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            romDiv.querySelector('.estrelas').dataset.media = data.media;
+                            mediaSpan.textContent = parseFloat(data.media).toFixed(2);
+                            estrelas.forEach(s => s.style.color = s.dataset.valor <= data.media ? 'gold' : 'gray');
+                        });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class ROM(models.Model):
     EMULADOR_CHOICES =   [
-        ('ns', 'Nintendo Switch'),
+        ('nswitch', 'Nintendo Switch'),
         ('gba', 'GBA'),
         ('nes', 'NES'),
         ('ps1', 'PS1'),
@@ -22,8 +22,10 @@ class ROM(models.Model):
 class Avaliacao(models.Model):
     rom = models.ForeignKey(ROM, on_delete=models.CASCADE, related_name='avaliacoes')
     estrelas = models.PositiveBigIntegerField()
+    # identifica a sessão do usuário (não precisa logar)
     session_id = models.CharField(max_length=40, default="anon")
     criado_em = models.DateTimeField(auto_now_add=True)
 
+    # faz com que cada sessão só possa avaliar a mesma ROM uma vez
     class Meta:
         unique_together = ('rom', 'session_id')  
