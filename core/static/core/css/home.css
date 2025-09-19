@@ -250,19 +250,15 @@ section {
 
 .estrelas span {
     font-size: 20px;
-    cursor: default; 
+    cursor: pointer;
     color: #444;
+    transition: color 0.2s;
 }
 
-.estrelas span.full {
+.estrelas span.active {
     color: gold;
 }
 
-.estrelas span.half {
-    background: linear-gradient(90deg, gold 50%, #444 50%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
 .media {
     font-size: 14px;

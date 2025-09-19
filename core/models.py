@@ -47,7 +47,7 @@ class Avaliacao(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )
     # identifica a sessão do usuário (não precisa logar)
-    session_id = models.CharField(max_length=40, default="anon")
+    session_id = models.CharField(max_length=40, default=gerar_session_id)
     criado_em = models.DateTimeField(auto_now_add=True)
 
     # faz com que cada sessão só possa avaliar a mesma ROM uma vez

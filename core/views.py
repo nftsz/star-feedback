@@ -5,7 +5,6 @@ from django.http import JsonResponse
 from django.db.models.functions import Coalesce
 from django.db.models import FloatField
 
-
 def lista_roms(request):
     # pega todas as ROMs com média de avaliação e pré-carrega imagens relacionadas
     roms = (ROM.objects
@@ -51,7 +50,9 @@ def avaliar_rom(request, rom_id):
 
 def detalhe_rom(request, rom_id):
     rom = get_object_or_404(ROM, id=rom_id)
-    return render(request, "core/detalhe_rom.html", {"rom": rom})
+    media = rom.avaliacoes.aggregate(media=Avg('estrelas'))['media'] or 0
+    media_int = int(round(media))
+    return render(request, "core/detalhe_rom.html", {"rom": rom, "media": media, "media_int": media_int})
 
 def excluir_avaliacao(request, rom_id):
     if request.method == 'POST':
