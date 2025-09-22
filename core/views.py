@@ -11,8 +11,8 @@ def lista_roms(request):
         .all()
         .annotate(media=Coalesce(Avg('avaliacoes__estrelas'), Value(0, output_field=FloatField())))
         .prefetch_related('imagens')
-        .order_by('-media')[:5])
-    roms_recent = (ROM.objects.all().annotate(media=Avg('avaliacoes__estrelas')).prefetch_related('imagens').order_by('-criado_em')[:5])
+        .order_by('-media')[:8])
+    roms_recent = (ROM.objects.all().annotate(media=Avg('avaliacoes__estrelas')).prefetch_related('imagens').order_by('-criado_em')[:8])
 
     # transforma a média em int arredondado pra facilitar mostrar estrelas
     for rom in roms:

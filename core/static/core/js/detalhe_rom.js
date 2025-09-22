@@ -64,8 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mediaSpan.textContent = parseFloat(data.media).toFixed(2);
                 atualizarEstrelas(parseFloat(data.media));
 
-                // Redireciona para home
-                window.location.href = '/home';
+                alert('Sua avaliação foi registrada!');
             })
             .catch(err => console.error('Erro ao avaliar ROM:', err));
     });
